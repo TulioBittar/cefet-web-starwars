@@ -5,19 +5,21 @@
 //  - Quando um filme for clicado, exibir sua introdução
 
 import { play } from './music-sem-private.js'
+import { toRoman } from './roman.js'
 import { restartAnimation } from './restart-animation.js'
 import { friendlyFetch } from './friendly-fetch.js'
-import { toRoman } from './roman.js'
 
 const API_ENDPOINT = 'https://swapi.dev/api'
 
-play({
-  audioUrl: 'audio/tema-sw.mp3',
-  coverImageUrl: 'imgs/logo.svg',
-  title: 'Intro',
-  artist: 'John Williams'
-
-}, document.body)
+play(
+  {
+    audioUrl: 'audio/tema-sw.mp3',
+    coverImageUrl: 'imgs/logo.svg',
+    title: 'Intro',
+    artist: 'John Williams'
+  },
+  document.body
+)
 
 fetch(`${API_ENDPOINT}/films`)
   .then(response => response.json())
@@ -38,7 +40,7 @@ function compareMovies(a, b){
 
 function insertMovie({title, episode_id, opening_crawl}, parentEl) {
   let liEl = document.createElement('li')
-  liEl.innerHTML = `Episode ${toRomanNumber(episode_id)} - ${title}`
+  liEl.innerHTML = `Episode ${toRoman(episode_id)} - ${title}`
   liEl.addEventListener('click', event => changeIntroduction(title, episode_id, opening_crawl))
   parentEl.appendChild(liEl)
 }
@@ -46,7 +48,7 @@ function insertMovie({title, episode_id, opening_crawl}, parentEl) {
 function changeIntroduction(title, episode_id, opening_crawl) {
   console.log(title)
   const introEl = document.querySelector('pre.introducao');
-  introEl.innerHTML = `Episode ${toRomanNumber(episode_id)}
+  introEl.innerHTML = `Episode ${toRoman(episode_id)}
   ${title}
 
   ${opening_crawl}`

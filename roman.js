@@ -1,4 +1,4 @@
-const ROMAN_NUMERALS = {
+const ROMAN = {
   1: 'I',
   2: 'II',
   3: 'III',
@@ -7,6 +7,6 @@ const ROMAN_NUMERALS = {
   6: 'VI',
 }
 
-export function toRomanNumber(decimalNumber){
-    return ROMAN_NUMERALS[decimalNumber].padEnd(3, ' ');
+export function toRoman(decimalNumber){
+    return ROMAN[decimalNumber].padEnd(3, ' ');
 }
